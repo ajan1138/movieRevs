@@ -1,12 +1,5 @@
-import Link from "next/link";
-
 function Page() {
-  return (
-    <div>
-      SIGN IN
-      <Link href="/register">Click to register</Link>
-    </div>
-  );
+  return <div className="flex">SIGN IN</div>;
 }
 
 export default Page;
