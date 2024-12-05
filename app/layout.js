@@ -1,4 +1,4 @@
-import Header from "./_components/Header";
+import { EmPassProvider } from "./_contexts/emailAndPasswordContext";
 
 import "@/app/_styles/global.css";
 
@@ -13,7 +13,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-blue-950">{children}</body>
+      <body className="flex flex-col bg-blue-950">
+        <EmPassProvider>{children}</EmPassProvider>
+      </body>
     </html>
   );
 }
