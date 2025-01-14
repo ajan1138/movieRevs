@@ -12,6 +12,8 @@ function RegisterForm() {
     setPassword,
     isPasswordValid,
     setIsPasswordValid,
+    confirmPassword,
+    setConfirmPassword,
   } = useCon();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -30,12 +32,19 @@ function RegisterForm() {
 
     setPassword(passwordValue);
 
+    console.log(passwordValue);
     setIsPasswordValid(passwordRegex.test(passwordValue));
   }
 
   function handleSubmit() {
     setEmail("");
     setPassword("");
+  }
+
+  function handleConfirmPassword(e) {
+    setConfirmPassword(e.target.value);
+
+    console.log(e.target.value);
   }
 
   return (
@@ -64,7 +73,7 @@ function RegisterForm() {
         <div className="space-x-2">
           <label className="font-bold text-2xl">Password: </label>
           <input
-            type="text"
+            type="password"
             className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
             placeholder="Enter password.."
             value={password}
@@ -76,6 +85,24 @@ function RegisterForm() {
             </p>
           )}
         </div>
+
+        <div className="space-x-2 py-2">
+          <label className="font-bold text-2xl -ml-[96px]">
+            Confirm Password:{" "}
+          </label>
+          <input
+            type="password"
+            placeholder="Confirm password.."
+            className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
+            onChange={handleConfirmPassword}
+            value={confirmPassword}
+          />
+        </div>
+        {password !== confirmPassword && confirmPassword !== "" ? (
+          <p className="text-red-600 font-semibold mb-1 items-end  my-3">
+            Password is not the same!
+          </p>
+        ) : null}
       </div>
 
       <div className="w-fit self-center">

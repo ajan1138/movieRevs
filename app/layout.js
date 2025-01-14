@@ -1,4 +1,5 @@
 import { EmPassProvider } from "./_contexts/emailAndPasswordContext";
+import { Toaster } from "react-hot-toast";
 
 import "@/app/_styles/global.css";
 
@@ -13,8 +14,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col bg-blue-950">
+      <body className="flex flex-col bg-gray-900">
         <EmPassProvider>{children}</EmPassProvider>
+        <Toaster position="top-center" containerStyle={{ marginTop: "85px" }} />
       </body>
     </html>
   );

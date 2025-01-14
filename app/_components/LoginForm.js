@@ -59,7 +59,7 @@ function LoginForm() {
         <div className="space-x-2">
           <label className="font-bold text-2xl">Password: </label>
           <input
-            type="text"
+            type="password"
             className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
             placeholder="Enter password.."
             value={password}
