@@ -1,7 +1,7 @@
 import Hero from "./_components/Hero";
 
-function Page() {
-  return <Hero />;
+function Page({ searchParams }) {
+  return <Hero searchParams={searchParams} />;
 }
 
 export default Page;

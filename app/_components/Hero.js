@@ -2,12 +2,12 @@ import Header from "./Header";
 import MovieList from "./MovieList";
 import Pagination from "./Pagination";
 
-function Hero() {
+function Hero({ searchParams }) {
   return (
     <div>
       <Header />
 
-      <MovieList />
+      <MovieList searchParams={searchParams} />
       <Pagination />
     </div>
   );

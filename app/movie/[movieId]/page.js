@@ -3,7 +3,7 @@ import MovieDetails from "@/app/_components/MovieDetails";
 import SimilarMovies from "@/app/_components/SimilarMovies";
 
 async function Page({ params }) {
-  const { movieId } = params;
+  const { movieId } = await params;
   const movieRaw = await fetch(`http://localhost:8080/movies/${movieId}`);
   const [movie, simMovies] = await movieRaw.json();
 

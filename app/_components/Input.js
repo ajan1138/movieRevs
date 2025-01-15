@@ -18,7 +18,7 @@ function Input() {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set("search", `${input}`);
 
-    router.push(`/${newParams.toString()}`);
+    router.replace(`/?${newParams.toString()}`);
   };
 
   return (
