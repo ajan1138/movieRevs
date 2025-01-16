@@ -15,7 +15,7 @@ function Card({ title, rating, zanr, description, actors, slika }) {
         <div className="flex items-center space-x-2 text-lg">
           <span className="font-semibold">RATING:</span>
           <span className="text-yellow-400 flex items-center">
-            <FaStar /> {rating.toFixed(1)}
+            <FaStar /> {rating != "0.0" ? rating.toFixed(1) : "Unknown rating"}
           </span>
         </div>
 

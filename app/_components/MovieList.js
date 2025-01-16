@@ -20,7 +20,9 @@ async function MovieList({ searchParams }) {
   return (
     <div className="grid grid-cols-3 gap-12 p-20 place-items-center">
       <h1 className="text-4xl font-bold font-sans ml-20 animate-slide-fade text-white mt-[100px] block col-span-3">
-        Top movies nowadayas . . .
+        {!params.search
+          ? "Top movies nowadayas . . ."
+          : `Listing movies for the '${params.search}' search...`}
       </h1>
       {data.results && data.results.length > 0 ? (
         data.results.map((movie) => {

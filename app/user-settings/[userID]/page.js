@@ -33,7 +33,6 @@ function page() {
 
     setPassword(passwordValue);
 
-    console.log(passwordValue);
     setIsPasswordValid(passwordRegex.test(passwordValue));
   }
 
@@ -44,8 +43,6 @@ function page() {
 
   function handleConfirmPassword(e) {
     setConfirmPassword(e.target.value);
-
-    console.log(e.target.value);
   }
 
   return (

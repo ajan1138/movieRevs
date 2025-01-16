@@ -7,7 +7,7 @@ import Input from "./Input";
 
 function Header() {
   return (
-    <div className="w-full bg-slate-950 h-20 bg-transparent flex justify-center items-center z-10 top-0 fixed">
+    <div className="w-full bg-slate-600 h-20 bg-transparent flex justify-center items-center z-10 top-0 fixed">
       <Logo />
 
       <Input />

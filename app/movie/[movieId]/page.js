@@ -4,7 +4,9 @@ import SimilarMovies from "@/app/_components/SimilarMovies";
 
 async function Page({ params }) {
   const { movieId } = await params;
+
   const movieRaw = await fetch(`http://localhost:8080/movies/${movieId}`);
+
   const [movie, simMovies] = await movieRaw.json();
 
   let backdropURL = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
