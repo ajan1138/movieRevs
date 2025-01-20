@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useCon } from "../_contexts/emailAndPasswordContext";
 import ConfirmPassword from "./_form-components/ConfirmPassword";
 import Email from "./_form-components/Email";
@@ -10,12 +11,18 @@ import Password from "./_form-components/Password";
 import Surname from "./_form-components/Surname";
 
 function RegisterForm() {
+  const router = useRouter();
+
   const {
     name,
+    setName,
     surname,
+    setSurname,
     email,
+    setEmail,
     isEmailValid,
     password,
+    setPassword,
     isPasswordValid,
     confirmPassword,
   } = useCon();
@@ -29,7 +36,12 @@ function RegisterForm() {
       password === confirmPassword &&
       name
     ) {
-      const userData = { email, password, name };
+      const userData = {
+        email,
+        password,
+        name,
+        ...(surname ? { surname } : ""),
+      };
 
       fetch("http://localhost:8080/register", {
         method: "POST",
@@ -41,6 +53,11 @@ function RegisterForm() {
         .then((response) => response.json())
         .then((data) => {
           console.log("User registered:", data);
+          router.push("/login");
+          setName("");
+          setSurname("");
+          setEmail("");
+          setPassword("");
         })
         .catch((error) => {
           console.error("Error:", error);
