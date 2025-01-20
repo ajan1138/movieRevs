@@ -1,117 +1,76 @@
 "use client";
 
 import { useCon } from "../_contexts/emailAndPasswordContext";
+import ConfirmPassword from "./_form-components/ConfirmPassword";
+import Email from "./_form-components/Email";
+import FormButton from "./_form-components/FormButton";
+import Label from "./_form-components/Label";
+import Name from "./_form-components/Name";
+import Password from "./_form-components/Password";
+import Surname from "./_form-components/Surname";
 
 function RegisterForm() {
   const {
+    name,
+    surname,
     email,
-    setEmail,
     isEmailValid,
-    setIsEmailValid,
     password,
-    setPassword,
     isPasswordValid,
-    setIsPasswordValid,
     confirmPassword,
-    setConfirmPassword,
   } = useCon();
 
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*\d).{8,}$/;
+  function handleSubmit(e) {
+    e.preventDefault();
 
-  function handleEmail(e) {
-    const emailValue = e.target.value;
+    if (
+      isEmailValid &&
+      isPasswordValid &&
+      password === confirmPassword &&
+      name
+    ) {
+      const userData = { email, password, name };
 
-    setEmail(emailValue);
-
-    setIsEmailValid(email === "" ? true : emailRegex.test(emailValue));
-  }
-
-  function handlePassword(e) {
-    const passwordValue = e.target.value;
-
-    setPassword(passwordValue);
-
-    console.log(passwordValue);
-    setIsPasswordValid(passwordRegex.test(passwordValue));
-  }
-
-  function handleSubmit() {
-    setEmail("");
-    setPassword("");
-  }
-
-  function handleConfirmPassword(e) {
-    setConfirmPassword(e.target.value);
-
-    console.log(e.target.value);
+      fetch("http://localhost:8080/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("User registered:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    }
   }
 
   return (
-    <form className="text-black flex flex-col w-[720px] bg-white rounded-3xl">
+    <form
+      className="text-black flex flex-col w-[720px] bg-white rounded-3xl"
+      onSubmit={handleSubmit}
+    >
       <div className="flex items-center justify-center border-b border-gray-600 p-4 pb-6 ">
-        <label className="text-7xl font-bold">Register</label>
+        <Label>Register</Label>
       </div>
 
       <div className="flex justify-center items-center flex-col mb-6 border-b border-gray-600 p-10">
-        <div className="space-x-[56px] mb-2 flex-row">
-          <label className="font-bold text-2xl">Email: </label>
-          <input
-            type="text"
-            className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
-            placeholder="Enter email.."
-            value={email}
-            onChange={handleEmail}
-          />
-          {!isEmailValid && (
-            <p className="text-red-600 font-semibold mb-1 items-end pl-[72px] my-3">
-              Please enter a valid email!
-            </p>
-          )}
-        </div>
+        <Name />
 
-        <div className="space-x-2">
-          <label className="font-bold text-2xl">Password: </label>
-          <input
-            type="password"
-            className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
-            placeholder="Enter password.."
-            value={password}
-            onChange={handlePassword}
-          />
-          {!isPasswordValid && (
-            <p className="text-red-600 font-semibold mb-1 items-end  my-3">
-              Password must contain nums and 8 chars atleast!
-            </p>
-          )}
-        </div>
+        <Surname />
 
-        <div className="space-x-2 py-2">
-          <label className="font-bold text-2xl -ml-[96px]">
-            Confirm Password:{" "}
-          </label>
-          <input
-            type="password"
-            placeholder="Confirm password.."
-            className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
-            onChange={handleConfirmPassword}
-            value={confirmPassword}
-          />
-        </div>
-        {password !== confirmPassword && confirmPassword !== "" ? (
-          <p className="text-red-600 font-semibold mb-1 items-end  my-3">
-            Password is not the same!
-          </p>
-        ) : null}
+        <Email />
+
+        <Password />
+
+        <ConfirmPassword />
       </div>
 
       <div className="w-fit self-center">
-        <button
-          className="bg-blue-900 text-white text-2xl font-bold py-2 px-6 rounded  mb-6"
-          onClick={handleSubmit}
-        >
-          Register Account
-        </button>
+        <FormButton>Register now!</FormButton>
       </div>
     </form>
   );

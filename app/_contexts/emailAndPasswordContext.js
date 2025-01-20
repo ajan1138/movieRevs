@@ -7,6 +7,9 @@ const EmailAndPasswordContext = createContext();
 function EmPassProvider({ children }) {
   const initialState = true;
 
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(initialState);
 
@@ -18,6 +21,10 @@ function EmPassProvider({ children }) {
   return (
     <EmailAndPasswordContext.Provider
       value={{
+        name,
+        setName,
+        surname,
+        setSurname,
         email,
         setEmail,
         isEmailValid,

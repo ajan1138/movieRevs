@@ -13,7 +13,6 @@ function page() {
     setPassword,
     isPasswordValid,
     setIsPasswordValid,
-    confirmPassword,
     setConfirmPassword,
   } = useCon();
 
@@ -99,19 +98,6 @@ function page() {
                 Password must contain nums and 8 chars atleast!
               </p>
             )}
-          </div>
-
-          <div className="space-x-2 py-2">
-            <label className="font-bold text-2xl -ml-[96px]">
-              Confirm Password:{" "}
-            </label>
-            <input
-              type="password"
-              placeholder="Confirm password.."
-              className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
-              onChange={handleConfirmPassword}
-              value={confirmPassword}
-            />
           </div>
 
           <div className=" mb-2 flex-row">
