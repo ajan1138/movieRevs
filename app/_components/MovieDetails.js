@@ -1,19 +1,18 @@
 import Image from "next/image";
 
-import photo from "@/public/inception.png";
-
 import Badge from "./Badge";
 import WatchButton from "./WatchButton";
 import StarRating from "./StarRating";
 import AddButton from "./AddButton";
 
-function MovieDetails({
+async function MovieDetails({
   genres,
   description,
   title,
   poster,
   vote,
   releaseDate,
+  token,
 }) {
   return (
     <div className="flex flex-row items-center mt-20 mx-20 overflow-hidden ">
@@ -33,7 +32,15 @@ function MovieDetails({
         <p className="pr-24">{description}</p>
         <div className="flex flex-row space-x-5">
           <WatchButton />
-          <AddButton />
+          <AddButton
+            genres={genres}
+            description={description}
+            title={title}
+            poster={poster}
+            rate={vote}
+            releaseDate={releaseDate}
+            token={token}
+          />
         </div>
 
         <StarRating vote={vote} />

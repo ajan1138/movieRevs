@@ -1,9 +1,14 @@
+import { cookies } from "next/headers";
+
 import Header from "@/app/_components/Header";
 import MovieDetails from "@/app/_components/MovieDetails";
 import SimilarMovies from "@/app/_components/SimilarMovies";
 
 async function Page({ params }) {
   const { movieId } = await params;
+
+  const cookieStore = cookies();
+  const token = (await cookieStore).get("token");
 
   const movieRaw = await fetch(`http://localhost:8080/movies/${movieId}`);
 
@@ -29,6 +34,7 @@ async function Page({ params }) {
           poster={posterURL}
           vote={movie.vote_average}
           releaseDate={movie.release_date}
+          token={token}
         />
         <SimilarMovies simMovies={simMovies.results} />
       </div>

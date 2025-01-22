@@ -5,17 +5,17 @@ async function MovieList({ searchParams }) {
   const params = await searchParams;
   let data;
 
+  let url;
+
   if (!params.search) {
-    const rawData = await fetch(`http://localhost:8080/`);
-    data = await rawData.json();
+    url = `http://localhost:8080/`;
   }
 
   if (params.search) {
-    const rawData = await fetch(
-      `http://localhost:8080/search?search=${params.search}`
-    );
-    data = await rawData.json();
+    url = `http://localhost:8080/search?search=${params.search}`;
   }
+  const rawData = await fetch(url);
+  data = await rawData.json();
 
   return (
     <div className="grid grid-cols-3 gap-12 p-20 place-items-center">

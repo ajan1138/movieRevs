@@ -4,8 +4,6 @@ function ConfirmPassword() {
   const { password, confirmPassword, setConfirmPassword } = useCon();
   function handleConfirmPassword(e) {
     setConfirmPassword(e.target.value);
-
-    console.log(e.target.value);
   }
   return (
     <div className="space-x-2 py-2">
