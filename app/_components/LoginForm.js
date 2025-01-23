@@ -7,6 +7,7 @@ import FormButton from "./_form-components/FormButton";
 import Label from "./_form-components/Label";
 import Password from "./_form-components/Password";
 import { useState } from "react";
+import FormError from "./_form-components/FormError";
 
 function LoginForm() {
   const { email, password, setEmail, setPassword } = useCon();
@@ -59,15 +60,7 @@ function LoginForm() {
       <div className="w-fit self-center">
         <FormButton>LOGIN</FormButton>
       </div>
-      {error ? (
-        <div className="flex justify-center items-center">
-          <h1 className="text-4xl font-bold justify-center items-center text-red-600 underline p-3">
-            {error}
-          </h1>
-        </div>
-      ) : (
-        ""
-      )}
+      {error ? <FormError>{error}</FormError> : ""}
     </form>
   );
 }

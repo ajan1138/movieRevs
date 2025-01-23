@@ -32,12 +32,12 @@ function AddButton({
       });
 
       if (!response.ok) {
-        throw new Error("Login for this feature!");
+        throw new Error("Movie is already in bookmarks!");
       }
 
       toast.success("Movie added successfully!");
     } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      toast.error(error.message || "");
     }
   }
 

@@ -1,9 +1,34 @@
+"use client";
+
 import Image from "next/image";
 import { FaHeart, FaStar } from "react-icons/fa";
 
 import photo from "@/public/inception.png";
 
-function FavoritesCard({ movie, num }) {
+function FavoritesCard({ movie, num, token }) {
+  async function handleClick() {
+    try {
+      const bookmarkID = movie.id;
+      const response = await fetch("http://localhost:8080/bookmark", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.value}`,
+        },
+        body: JSON.stringify({ bookmarkID }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message);
+      }
+
+      console.log("Bookmark successfully deleted");
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+
   return (
     <div className="bg-slate-800 rounded-xl shadow-md overflow-hidden mb-6">
       <div className="relative w-full h-48">
@@ -24,7 +49,10 @@ function FavoritesCard({ movie, num }) {
         <p className="text-sm mb-2">Opis: {movie.description}</p>
       </div>
 
-      <button className="w-full py-2 bg-red-600 hover:bg-red-700 transition-all text-center text-sm font-semibold">
+      <button
+        className="w-full py-2 bg-red-600 hover:bg-red-700 transition-all text-center text-sm font-semibold"
+        onClick={handleClick}
+      >
         <FaHeart className="inline-block mr-2" /> Remove from Favorites
       </button>
     </div>
