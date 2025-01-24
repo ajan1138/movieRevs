@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Input from "./Input";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
+import LogoutButton from "./_form-components/LogoutButton";
 
 async function Header() {
   const cookieStore = cookies();
@@ -43,12 +44,7 @@ async function Header() {
             <IoSettingsOutline size={24} />
           </Link>
 
-          <Link
-            className="white no-underline p-2 hover:bg-gray-900 transition-colors duration-200 rounded-xl ml-4 text-white"
-            href="/logout"
-          >
-            Logout
-          </Link>
+          <LogoutButton token={tokenCookie.value}>Logout</LogoutButton>
         </>
       ) : (
         <Link
