@@ -10,8 +10,10 @@ import Name from "./_form-components/Name";
 import Password from "./_form-components/Password";
 import Surname from "./_form-components/Surname";
 
-function RegisterForm() {
+function RegisterForm({ title, buttonText, user }) {
   const router = useRouter();
+
+  const { name: firstName, surname: lastName, email: userEmail } = user;
 
   const {
     name,
@@ -71,15 +73,15 @@ function RegisterForm() {
       onSubmit={handleSubmit}
     >
       <div className="flex items-center justify-center border-b border-gray-600 p-4 pb-6 ">
-        <Label>Register</Label>
+        <Label>{title}</Label>
       </div>
 
       <div className="flex justify-center items-center flex-col mb-6 border-b border-gray-600 p-10">
-        <Name />
+        <Name firstName={firstName} />
 
-        <Surname />
+        <Surname lastName={lastName} />
 
-        <Email />
+        <Email userEmail={userEmail} />
 
         <Password />
 
@@ -87,7 +89,7 @@ function RegisterForm() {
       </div>
 
       <div className="w-fit self-center">
-        <FormButton>Register now!</FormButton>
+        <FormButton>{buttonText}</FormButton>
       </div>
     </form>
   );
