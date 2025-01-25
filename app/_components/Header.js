@@ -36,7 +36,9 @@ async function Header() {
 
       {user ? (
         <>
-          <span className="text-white mr-4">Welcome, {user.name}</span>
+          <span className="text-white mr-4 capitalize">
+            Welcome, {user.name}
+          </span>
           <Link
             className="white no-underline pl-6 hover:bg-gray-900 text-white"
             href={`/user-settings/${user.userId}`}
