@@ -20,8 +20,8 @@ function Email({ userEmail, onChange }) {
         type="text"
         className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
         placeholder="Enter email.."
-        value={userEmail ? userEmail : email}
-        onChange={email ? handleEmail : onChange}
+        value={email}
+        onChange={handleEmail}
       />
       {!isEmailValid && (
         <p className="text-red-600 font-semibold mb-1 items-end pl-[72px] my-3">

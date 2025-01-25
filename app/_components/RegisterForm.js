@@ -9,28 +9,29 @@ import Label from "./_form-components/Label";
 import Name from "./_form-components/Name";
 import Password from "./_form-components/Password";
 import Surname from "./_form-components/Surname";
-import { useState } from "react";
+import { useEffect } from "react";
 
-function RegisterForm({ title, buttonText, user }) {
+function RegisterForm({ title, buttonText, user, token }) {
   const router = useRouter();
 
-  const [firstName, setFirstName] = useState(user?.name || "");
-  const [lastName, setLastName] = useState(user?.surname || "");
-  const [userEmail, setUserEmail] = useState(user?.email || "");
-
   const {
-    name,
-    setName,
-    surname,
-    setSurname,
-    email,
-    setEmail,
     isEmailValid,
     password,
     setPassword,
     isPasswordValid,
     confirmPassword,
   } = useCon();
+
+  let { name, surname, email, setName, setSurname, setEmail } = useCon();
+
+  //// HITNO IZBACITI STO PRIJE I PROMJENITI // KOD JE PRELOS
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setSurname(user.surname);
+      setEmail(user.email);
+    }
+  }, [user, setName, setSurname, setEmail]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -74,9 +75,9 @@ function RegisterForm({ title, buttonText, user }) {
     e.preventDefault();
 
     const userData = {
-      firstName,
-      lastName,
-      userEmail,
+      name,
+      surname,
+      email,
     };
 
     try {
@@ -84,6 +85,7 @@ function RegisterForm({ title, buttonText, user }) {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token.value}`,
         },
         body: JSON.stringify(userData),
       });
@@ -93,7 +95,7 @@ function RegisterForm({ title, buttonText, user }) {
       }
 
       const data = await response.json();
-      console.log("User updated successfully:", data);
+      router.push("/");
     } catch (error) {
       console.error("Error updating user:", error.message);
     }
@@ -109,20 +111,11 @@ function RegisterForm({ title, buttonText, user }) {
       </div>
 
       <div className="flex justify-center items-center flex-col mb-6 border-b border-gray-600 p-10">
-        <Name
-          firstName={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
+        <Name />
 
-        <Surname
-          lastName={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
+        <Surname />
 
-        <Email
-          userEmail={userEmail}
-          onChange={(e) => setUserEmail(e.target.value)}
-        />
+        <Email />
 
         <Password />
 

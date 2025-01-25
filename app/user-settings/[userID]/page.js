@@ -6,8 +6,6 @@ async function page({ params }) {
   const cookieStore = cookies();
   const token = (await cookieStore).get("token");
 
-  console.log(token);
-
   const url = `http://localhost:8080/user-settings/${userID}`;
 
   const dataRaw = await fetch(url, {
@@ -21,7 +19,12 @@ async function page({ params }) {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <RegisterForm title={"Your data:"} buttonText={"Update!"} user={data} />
+      <RegisterForm
+        title={"Your data:"}
+        buttonText={"Update!"}
+        user={data}
+        token={token}
+      />
     </div>
   );
 }

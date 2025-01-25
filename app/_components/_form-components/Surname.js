@@ -1,6 +1,6 @@
 import { useCon } from "@/app/_contexts/emailAndPasswordContext";
 
-function Surname({ lastName, onChange }) {
+function Surname() {
   const { surname, setSurname } = useCon();
 
   function handleSurname(e) {
@@ -16,8 +16,8 @@ function Surname({ lastName, onChange }) {
         type="text"
         className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
         placeholder="Optional"
-        value={lastName ? lastName : surname}
-        onChange={surname ? handleSurname : onChange}
+        value={surname}
+        onChange={handleSurname}
       />
     </div>
   );

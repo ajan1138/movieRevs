@@ -43,7 +43,6 @@ async function page() {
   return (
     <div>
       <Header />
-      <span className="font-bold text-white">FAVORITES</span>
       <div className="min-h-screen bg-gray-900 text-white p-6">
         <h1 className="text-4xl font-bold text-center mb-6 mt-[100px]">
           My Favorites
