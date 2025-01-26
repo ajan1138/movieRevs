@@ -15,7 +15,7 @@ function FavoritesList({ favorites, token }) {
       {favoriti.map((movie, index) => (
         <FavoritesCard
           movie={movie}
-          key={index}
+          key={movie.id}
           token={token}
           onRemove={handleRemove}
         />
