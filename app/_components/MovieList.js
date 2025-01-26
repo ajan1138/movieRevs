@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 async function MovieList({ searchParams }) {
   const params = await searchParams;
@@ -8,24 +9,30 @@ async function MovieList({ searchParams }) {
   let url;
 
   if (!params.search) {
-    url = `http://localhost:8080/`;
+    url = `http://localhost:8080/?page=${params.page ? params.page : 1}`;
   }
 
   if (params.search) {
-    url = `http://localhost:8080/search?search=${params.search}`;
+    url = `http://localhost:8080/search?search=${params.search}&page=${
+      params.page ? params.page : 1
+    }&`;
   }
   const rawData = await fetch(url);
   data = await rawData.json();
+
+  let paginationSettings = data.paginationSettings;
 
   return (
     <div className="grid grid-cols-3 gap-12 p-20 place-items-center">
       <h1 className="text-4xl font-bold font-sans ml-20 animate-slide-fade text-white mt-[100px] block col-span-3">
         {!params.search
           ? "Top movies nowadayas . . ."
-          : `Listing movies for the '${params.search}' search...`}
+          : data.length > 0
+          ? `Listing movies for the '${params.search}' search...`
+          : "No movies found!"}
       </h1>
-      {data.results && data.results.length > 0 ? (
-        data.results.map((movie) => {
+      {data.data && data.data.length > 0 ? (
+        data.data.map((movie) => {
           return (
             <Link href={`/movie/${movie.id}`} key={movie.id}>
               <Card
@@ -40,6 +47,9 @@ async function MovieList({ searchParams }) {
       ) : (
         <p>No movies found!</p>
       )}
+      <div className="col-span-3 flex justify-center items-center mt-8">
+        <Pagination searchParams={searchParams} settings={paginationSettings} />
+      </div>
     </div>
   );
 }

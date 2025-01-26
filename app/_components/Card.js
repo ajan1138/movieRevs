@@ -1,9 +1,12 @@
 import Image from "next/image";
 
 import { FaStar } from "react-icons/fa";
+import photoNotFound from "@/public/no-posterMovie-found.png";
 
 function Card({ title, rating, zanr, description, actors, slika }) {
-  const photo = `https://image.tmdb.org/t/p/original${slika}`;
+  const photo = slika
+    ? `https://image.tmdb.org/t/p/original${slika}`
+    : photoNotFound;
 
   return (
     <div className="h-72 flex w-full rounded-xl border border-black">

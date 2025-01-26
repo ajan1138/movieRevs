@@ -1,41 +1,44 @@
-function Pagination() {
-  const currentPage = 1;
-  const pageNumbers = [1, 2, 3];
-  const page = 1;
-  const totalPages = pageNumbers.length;
+import PaginationButton from "./PaginationButton";
+
+async function Pagination({ searchParams, settings }) {
+  const page = (await searchParams?.page) || 1;
+  const search = (await searchParams?.search) || undefined;
+
+  console.log(search);
+
+  const {
+    currentPage,
+    hasNextPage,
+    hasPreviousPage,
+    nextPage,
+    previousPage,
+    lastPage,
+  } = settings;
 
   return (
     <div className="flex items-center space-x-2 mt-4 w-[300px] mx-auto">
-      <button
-        className={`px-4 py-2 bg-gray-600 text-white rounded-lg ${
-          currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        disabled={currentPage === 1}
-      >
-        Previous
-      </button>
+      {page != 1 && previousPage != 1 && (
+        <PaginationButton search={search}>1</PaginationButton>
+      )}
 
-      {pageNumbers.map((page) => (
-        <button
-          key={page}
-          className={`px-4 py-2 rounded-lg border border-white ${
-            currentPage === page
-              ? "bg-black text-white"
-              : "bg-gray-400 text-gray-800"
-          } hover:bg-blue-300`}
-        >
-          {page}
-        </button>
-      ))}
+      {hasPreviousPage && (
+        <PaginationButton search={search}>{previousPage}</PaginationButton>
+      )}
 
-      <button
-        className={`px-4 py-2 bg-gray-600 text-white rounded-lg ${
-          currentPage === totalPages ? "opacity-50 cursor-not-allowed" : ""
-        }`}
-        disabled={currentPage === totalPages}
+      <PaginationButton
+        className="bg-blue-500 text-white font-bold"
+        search={search}
       >
-        Next
-      </button>
+        {currentPage}
+      </PaginationButton>
+
+      {hasNextPage && (
+        <PaginationButton search={search}>{nextPage}</PaginationButton>
+      )}
+
+      {lastPage != currentPage && nextPage != lastPage && (
+        <PaginationButton search={search}>{lastPage}</PaginationButton>
+      )}
     </div>
   );
 }
