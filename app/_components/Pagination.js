@@ -1,11 +1,6 @@
 import PaginationButton from "./PaginationButton";
 
-async function Pagination({ searchParams, settings }) {
-  const page = (await searchParams?.page) || 1;
-  const search = (await searchParams?.search) || undefined;
-
-  console.log(search);
-
+function Pagination({ page, settings, search }) {
   const {
     currentPage,
     hasNextPage,
@@ -28,6 +23,7 @@ async function Pagination({ searchParams, settings }) {
       <PaginationButton
         className="bg-blue-500 text-white font-bold"
         search={search}
+        currentPage={currentPage}
       >
         {currentPage}
       </PaginationButton>
