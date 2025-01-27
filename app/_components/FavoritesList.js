@@ -18,6 +18,7 @@ function FavoritesList({ favorites, token }) {
           key={movie.id}
           token={token}
           onRemove={handleRemove}
+          genres={movie.genres}
         />
       ))}
     </div>

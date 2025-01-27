@@ -29,7 +29,7 @@ async function MovieList({ searchParams }) {
       <h1 className="text-4xl font-bold font-sans ml-20 animate-slide-fade text-white mt-[100px] block col-span-3">
         {!search
           ? "Top movies nowadayas . . ."
-          : data.length > 0
+          : data.data.length > 0
           ? `Listing movies for the '${search}' search...`
           : "No movies found!"}
       </h1>

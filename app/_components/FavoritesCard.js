@@ -3,7 +3,7 @@ import { FaHeart, FaStar } from "react-icons/fa";
 import { useState, useOptimistic, startTransition } from "react";
 import photo from "@/public/inception.png";
 
-function FavoritesCard({ movie, token, onRemove }) {
+function FavoritesCard({ movie, token, onRemove, genres }) {
   const [data, setData] = useState(movie);
 
   const [optimisticData, setOptimisticData] = useOptimistic(data);
@@ -41,10 +41,10 @@ function FavoritesCard({ movie, token, onRemove }) {
   if (!optimisticData) return null;
 
   return (
-    <div className="bg-slate-800 rounded-xl shadow-md overflow-hidden mb-6">
+    <div className="bg-slate-800 rounded-xl shadow-md overflow-hidden mb-6 flex flex-col justify-between">
       <div className="relative w-full h-48">
         <Image
-          src={photo}
+          src={movie.poster}
           alt={data.title}
           fill
           className="rounded-t-xl object-cover"
@@ -54,10 +54,10 @@ function FavoritesCard({ movie, token, onRemove }) {
       <div className="p-4">
         <h2 className="text-2xl font-bold text-white mb-2">{data.title}</h2>
         <div className="flex items-center text-yellow-400 mb-2">
-          <FaStar className="mr-2" /> {data.rate}
+          <FaStar className="mr-2" /> {data.rate.toFixed(1)}
         </div>
-        <p className="text-sm text-gray-400 mb-2">Žanr: {data.genre}</p>
-        <p className="text-sm mb-2">Opis: {data.description}</p>
+        <p className="text-sm text-gray-400 mb-2">Genre: {genres.join(", ")}</p>
+        <p className="text-sm mb-2">Description: {data.description}</p>
       </div>
 
       <button

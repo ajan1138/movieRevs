@@ -14,6 +14,12 @@ async function MovieDetails({
   releaseDate,
   token,
 }) {
+  const genreNames = genres.map((genre) => {
+    return genre.name;
+  });
+
+  console.log(genreNames);
+
   return (
     <div className="flex flex-row items-center mt-20 mx-20 overflow-hidden ">
       <Image
@@ -22,6 +28,7 @@ async function MovieDetails({
         alt={`Poster of the movie`}
         height={540}
         width={360}
+        priority
       />
       <div className="flex flex-col ml-20 space-y-5">
         <p className="logo body text-6xl">{title}</p>
@@ -33,7 +40,7 @@ async function MovieDetails({
         <div className="flex flex-row space-x-5">
           <WatchButton />
           <AddButton
-            genres={genres}
+            genres={genreNames}
             description={description}
             title={title}
             poster={poster}

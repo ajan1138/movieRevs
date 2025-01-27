@@ -20,7 +20,7 @@ function Card({ title, rating, zanr, description, actors, slika }) {
         />
       </div>
       <div className="w-3/5 bg-slate-500 flex flex-col rounded-r-xl p-4 text-white shadow-lg space-y-3">
-        <h1 className="font-bold text-3xl">{title}</h1>
+        <h1 className="font-bold text-3xl line-clamp-3">{title}</h1>
         <div className="flex items-center space-x-2 text-lg">
           <span className="font-semibold">RATING:</span>
           <span className="text-yellow-400 flex items-center">

@@ -28,6 +28,8 @@ function AddButton({
           description,
           rate,
           releaseDate,
+          poster,
+          genres,
         }),
       });
 
