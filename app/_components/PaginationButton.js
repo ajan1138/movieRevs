@@ -27,9 +27,8 @@ function PaginationButton({
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const paginatedBookmarks = favoriti.slice(startIndex, endIndex);
-
-    setFavoriti(paginatedBookmarks);
+    const paginatedBookmarks =
+      favoriti?.slice(startIndex, endIndex) && setFavoriti(paginatedBookmarks);
   }
 
   return (

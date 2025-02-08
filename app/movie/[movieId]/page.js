@@ -15,7 +15,6 @@ async function Page({ params }) {
   const [movie, simMovies] = await movieRaw.json();
 
   let backdropURL = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
-  let posterURL = `https://image.tmdb.org/t/p/original${movie.poster_path}`;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
