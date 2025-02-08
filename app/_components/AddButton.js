@@ -2,15 +2,9 @@
 
 import { toast } from "react-hot-toast";
 
-function AddButton({
-  genres,
-  description,
-  title,
-  poster,
-  rate,
-  releaseDate,
-  token,
-}) {
+function AddButton({ movie, token }) {
+  const { genres, description, title, poster, vote, releaseDate } = movie;
+
   async function handleClick() {
     try {
       if (!token || !token.value) {

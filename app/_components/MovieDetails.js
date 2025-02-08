@@ -5,20 +5,12 @@ import WatchButton from "./WatchButton";
 import StarRating from "./StarRating";
 import AddButton from "./AddButton";
 
-async function MovieDetails({
-  genres,
-  description,
-  title,
-  poster,
-  vote,
-  releaseDate,
-  token,
-}) {
+async function MovieDetails({ movie, token }) {
+  const { genres, description, title, poster, vote, releaseDate } = movie;
+
   const genreNames = genres.map((genre) => {
     return genre.name;
   });
-
-  console.log(genreNames);
 
   return (
     <div className="flex flex-row items-center mt-20 mx-20 overflow-hidden ">
@@ -39,15 +31,7 @@ async function MovieDetails({
         <p className="pr-24">{description}</p>
         <div className="flex flex-row space-x-5">
           <WatchButton />
-          <AddButton
-            genres={genreNames}
-            description={description}
-            title={title}
-            poster={poster}
-            rate={vote}
-            releaseDate={releaseDate}
-            token={token}
-          />
+          <AddButton movie={movie} token={token} />
         </div>
 
         <StarRating vote={vote} />

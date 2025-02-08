@@ -54,6 +54,7 @@ async function MovieList({ searchParams }) {
           settings={paginationSettings}
           search={search}
           page={currentPage}
+          link="/"
         />
       </div>
     </div>

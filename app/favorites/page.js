@@ -1,29 +1,30 @@
-import Header from "../_components/Header";
-import FavoritesList from "../_components/FavoritesList";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import Header from "../_components/Header";
 
-async function page() {
+import FavoritesListWrapper from "../_components/FavoritesListWrapper";
+import LoginRequired from "../_components/LoginRequired";
+
+async function page({ searchParams }) {
   const cookieStore = cookies();
   const token = (await cookieStore).get("token");
+  const page = (await searchParams).page || 1;
 
   if (!token) {
-    return (
-      <div className="flex justify-center items-center text-white min-h-screen">
-        <h1 className="block">Please Login to see your bookmarks! </h1>
-        <Link href="/login">CLICK HERE!</Link>
-      </div>
-    );
+    return <LoginRequired />;
   }
 
-  const bookmarksRaw = await fetch("http://localhost:8080/bookmarks", {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token.value}`,
-    },
-  });
+  const bookmarksRaw = await fetch(
+    `http://localhost:8080/bookmarks${`?page=${page}`}`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token.value}`,
+      },
+    }
+  );
 
   if (!bookmarksRaw.ok) {
     return (
@@ -38,7 +39,7 @@ async function page() {
     );
   }
 
-  const bookmarks = await bookmarksRaw.json();
+  const bookmarksJSON = await bookmarksRaw.json();
 
   return (
     <div>
@@ -47,7 +48,11 @@ async function page() {
         <h1 className="text-4xl font-bold text-center mb-6 mt-[100px]">
           My Favorites
         </h1>
-        <FavoritesList favorites={bookmarks} token={token} />
+        <FavoritesListWrapper
+          favorites={bookmarksJSON}
+          token={token}
+          page={page}
+        />
       </div>
     </div>
   );

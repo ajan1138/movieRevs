@@ -27,15 +27,7 @@ async function Page({ params }) {
           backgroundImage: `linear-gradient(to bottom, rgb(0, 0, 0), rgba(0, 0, 0, 0.6)), url('${backdropURL}')`,
         }}
       >
-        <MovieDetails
-          genres={movie.genres}
-          description={movie.overview}
-          title={movie.title}
-          poster={posterURL}
-          vote={movie.vote_average}
-          releaseDate={movie.release_date}
-          token={token}
-        />
+        <MovieDetails movie={movie} token={token} />
         <SimilarMovies simMovies={simMovies.results} />
       </div>
     </div>
