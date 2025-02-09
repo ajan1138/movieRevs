@@ -2,9 +2,9 @@ import { toast } from "react-hot-toast";
 import LoginRequired from "../_components/LoginRequired";
 import NoBookmarks from "../_components/NoBookmarks";
 
-export async function handleDeleteBookmark(movie, token) {
+export async function handleDeleteBookmark(bookmarkID, token) {
+  console.log(bookmarkID);
   try {
-    const bookmarkID = movie.id;
     const response = await fetch("http://localhost:8080/bookmark", {
       method: "DELETE",
       headers: {

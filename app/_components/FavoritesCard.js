@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { FaHeart, FaStar } from "react-icons/fa";
-import { handleDeleteBookmark } from "../services/bookmarksApi";
+import DeleteFavoriteButton from "./DeleteFavoriteButton";
+import { FaStar } from "react-icons/fa";
 
-function FavoritesCard({ movie, token }) {
+function FavoritesCard({ movie, token, onDelete }) {
   const genreNames = movie.genres.map((genreString) => {
     const genre = JSON.parse(genreString);
     return genre.name;
@@ -33,12 +33,7 @@ function FavoritesCard({ movie, token }) {
         </p>
       </div>
 
-      <button
-        className="w-full py-2 bg-red-600 hover:bg-red-700 transition-all text-center text-sm font-semibold"
-        onClick={() => handleDeleteBookmark(movie, token)}
-      >
-        <FaHeart className="inline-block mr-2" /> Remove from Favorites
-      </button>
+      <DeleteFavoriteButton onDelete={onDelete} />
     </div>
   );
 }

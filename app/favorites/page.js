@@ -22,7 +22,7 @@ async function page({ searchParams }) {
           My Favorites
         </h1>
         <FavoritesListWrapper
-          favorites={bookmarksJSON}
+          favoriteMovies={bookmarksJSON}
           token={token}
           page={page}
         />
