@@ -1,28 +1,13 @@
 import Link from "next/link";
 import Card from "./Card";
 import Pagination from "./Pagination";
+import { handleGetMovies } from "../services/moviesApi";
 
 async function MovieList({ searchParams }) {
   const { search, page } = (await searchParams) || {};
   const currentPage = page || 1;
 
-  let data;
-
-  let url;
-
-  if (!search) {
-    url = `http://localhost:8080/?page=${page ? page : 1}`;
-  }
-
-  if (search) {
-    url = `http://localhost:8080/search?search=${search}&page=${
-      page ? page : 1
-    }&`;
-  }
-  const rawData = await fetch(url);
-  data = await rawData.json();
-
-  let paginationSettings = data.paginationSettings;
+  const data = await handleGetMovies(page, search);
 
   return (
     <div className="grid grid-cols-3 gap-12 p-20 place-items-center">
@@ -51,7 +36,7 @@ async function MovieList({ searchParams }) {
       )}
       <div className="col-span-3 flex justify-center items-center mt-8">
         <Pagination
-          settings={paginationSettings}
+          settings={data.paginationSettings}
           search={search}
           page={currentPage}
           link="/"

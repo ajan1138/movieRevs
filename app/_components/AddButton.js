@@ -1,49 +1,14 @@
 "use client";
 
 import { toast } from "react-hot-toast";
+import { handleAddBookmark } from "../services/bookmarksApi";
 
 function AddButton({ movie, token, poster }) {
-  const {
-    genres,
-    overview: description,
-    title,
-    vote_average: rate,
-    release_date: releaseDate,
-  } = movie;
-  async function handleClick() {
-    try {
-      if (!token || !token.value) {
-        throw new Error("Login for this feature!");
-      }
-      const response = await fetch("http://localhost:8080/bookmark", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token.value}`,
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          rate,
-          releaseDate,
-          poster,
-          genres,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Movie is already in bookmarks!");
-      }
-
-      toast.success("Movie added successfully!");
-    } catch (error) {
-      toast.error(error.message || "");
-    }
-  }
-
   return (
-    <button className="btn-add w-52" onClick={handleClick}>
+    <button
+      className="btn-add w-52"
+      onClick={() => handleAddBookmark(movie, token)}
+    >
       &#x2b; Add to list
     </button>
   );

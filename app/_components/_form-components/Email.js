@@ -1,6 +1,6 @@
 import { useCon } from "@/app/_contexts/emailAndPasswordContext";
 
-function Email({ userEmail, onChange }) {
+function Email({ defEmail }) {
   const { email, setEmail, isEmailValid, setIsEmailValid } = useCon();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -20,7 +20,7 @@ function Email({ userEmail, onChange }) {
         type="text"
         className="border border-gray-600 rounded-l w-[250px] px-3 py-1 focus:ring-4 focus:ring-blue-700 focus:ring-opacity-50"
         placeholder="Enter email.."
-        value={email}
+        defaultValue={defEmail ?? ""}
         onChange={handleEmail}
       />
       {!isEmailValid && (

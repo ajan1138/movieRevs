@@ -8,44 +8,19 @@ import Label from "./_form-components/Label";
 import Password from "./_form-components/Password";
 import { useState } from "react";
 import FormError from "./_form-components/FormError";
+import { handleLogin } from "../services/usersApi";
 
 function LoginForm() {
-  const { email, password, setEmail, setPassword } = useCon();
   const [error, setError] = useState();
+  const { email, password, setEmail, setPassword } = useCon();
   const router = useRouter();
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError();
-    try {
-      const response = await fetch("http://localhost:8080/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-        credentials: "include",
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        console.log("Login successful", data);
-        setEmail("");
-        setPassword("");
-        router.push("/");
-      } else {
-        setError("Invalid email or password");
-      }
-    } catch (error) {
-      setError(error.message || "Something went wrong");
-    }
-  };
 
   return (
     <form
       className="text-black flex flex-col w-[720px] bg-white rounded-3xl"
-      onSubmit={handleLogin}
+      onSubmit={(e) =>
+        handleLogin(e, setError, email, password, setEmail, setPassword, router)
+      }
     >
       <div className="flex items-center justify-center border-b border-gray-600 p-4 pb-6 ">
         <Label>Login</Label>

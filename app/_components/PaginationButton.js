@@ -2,19 +2,11 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 
-function PaginationButton({
-  children,
-  search,
-  currentPage,
-  link,
-  setFavoriti,
-  favoriti,
-}) {
+function PaginationButton({ children, search, currentPage, link }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const itemsPerPage = 4;
 
-  function handleClick() {
+  async function handleClick() {
     const newSearchParams = new URLSearchParams(searchParams);
 
     newSearchParams.set("page", children);
@@ -24,11 +16,6 @@ function PaginationButton({
     }
 
     router.push(`${link}?${newSearchParams.toString()}`);
-
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const paginatedBookmarks =
-      favoriti?.slice(startIndex, endIndex) && setFavoriti(paginatedBookmarks);
   }
 
   return (

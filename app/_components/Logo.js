@@ -12,6 +12,7 @@ function Logo() {
         height="70"
         width="70"
         alt="The Wild Oasis logo"
+        priority
       />
     </Link>
   );

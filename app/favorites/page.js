@@ -1,37 +1,18 @@
-import Link from "next/link";
 import { cookies } from "next/headers";
 import Header from "../_components/Header";
 
 import FavoritesListWrapper from "../_components/FavoritesListWrapper";
+import { handleGetBookmarks } from "../services/bookmarksApi";
 import LoginRequired from "../_components/LoginRequired";
-import NoBookmarks from "../_components/NoBookmarks";
 
 async function page({ searchParams }) {
   const cookieStore = cookies();
   const token = (await cookieStore).get("token");
   const page = (await searchParams).page || 1;
 
-  if (!token) {
-    return <LoginRequired />;
-  }
+  if (!token) return <LoginRequired />;
 
-  const bookmarksRaw = await fetch(
-    `http://localhost:8080/bookmarks${`?page=${page}`}`,
-    {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.value}`,
-      },
-    }
-  );
-
-  if (!bookmarksRaw.ok) {
-    return <NoBookmarks />;
-  }
-
-  const bookmarksJSON = await bookmarksRaw.json();
+  const bookmarksJSON = await handleGetBookmarks(token, page);
 
   return (
     <div>

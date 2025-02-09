@@ -30,8 +30,6 @@ export default function StarRating({
   size = 48,
   className = "",
   messages = [],
-  defaultRating = 0,
-  onSetRating,
   vote,
 }) {
   const [rating, setRating] = useState(vote.toFixed(1));

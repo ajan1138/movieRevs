@@ -1,4 +1,5 @@
 import Image from "next/image";
+import photo from "@/public/no-posterMovie-found.png";
 
 import Badge from "./Badge";
 import WatchButton from "./WatchButton";
@@ -17,11 +18,14 @@ async function MovieDetails({ movie, token }) {
 
   let poster = `https://image.tmdb.org/t/p/original${poster_path}`;
 
+  if (poster.includes("w500null") || poster.includes("originalnull"))
+    poster = photo;
+
+  console.log(poster);
+
   const genreNames = genres.map((genre) => {
     return genre.name;
   });
-
-  console.log(releaseDate);
 
   return (
     <div className="flex flex-row items-center mt-20 mx-20 overflow-hidden ">
