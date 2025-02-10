@@ -1,6 +1,15 @@
 import PaginationButton from "./PaginationButton";
 
-function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
+function Pagination({
+  page,
+  settings,
+  search,
+  link,
+  setFavoriti,
+  favoriti,
+  token,
+  setFavorites,
+}) {
   const {
     currentPage,
     hasNextPage,
@@ -18,6 +27,9 @@ function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
           search={search}
           setFavoriti={setFavoriti}
           favoriti={favoriti}
+          page={page}
+          token={token}
+          setFavorites={setFavorites}
         >
           1
         </PaginationButton>
@@ -29,6 +41,9 @@ function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
           search={search}
           setFavoriti={setFavoriti}
           favoriti={favoriti}
+          page={page}
+          token={token}
+          setFavorites={setFavorites}
         >
           {previousPage}
         </PaginationButton>
@@ -41,6 +56,9 @@ function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
         link={link}
         setFavoriti={setFavoriti}
         favoriti={favoriti}
+        page={page}
+        token={token}
+        setFavorites={setFavorites}
       >
         {currentPage}
       </PaginationButton>
@@ -51,6 +69,9 @@ function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
           search={search}
           setFavoriti={setFavoriti}
           favoriti={favoriti}
+          page={page}
+          token={token}
+          setFavorites={setFavorites}
         >
           {nextPage}
         </PaginationButton>
@@ -62,6 +83,9 @@ function Pagination({ page, settings, search, link, setFavoriti, favoriti }) {
           search={search}
           setFavoriti={setFavoriti}
           favoriti={favoriti}
+          page={page}
+          token={token}
+          setFavorites={setFavorites}
         >
           {lastPage}
         </PaginationButton>

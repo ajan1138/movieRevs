@@ -8,6 +8,7 @@ const queryClient = new QueryClient();
 
 export default function FavoritesListWrapper({ favoriteMovies, token, page }) {
   const [favorites, setFavorites] = useState(favoriteMovies);
+  const settings = favoriteMovies.paginationSettings;
 
   const handleDeleteSuccess = (movieId) => {
     setFavorites((prev) => ({
@@ -22,7 +23,9 @@ export default function FavoritesListWrapper({ favoriteMovies, token, page }) {
         favorites={favorites}
         token={token}
         page={page}
-        setFavorites={handleDeleteSuccess}
+        onDelete={handleDeleteSuccess}
+        settings={settings}
+        setFavorites={setFavorites}
       />
     </QueryClientProvider>
   );

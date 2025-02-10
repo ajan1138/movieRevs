@@ -5,7 +5,7 @@ import FavoritesCard from "./FavoritesCard";
 import Pagination from "./Pagination";
 import { handleDeleteBookmark } from "../services/bookmarksApi";
 
-function FavoritesList({ favorites, token, setFavorites }) {
+function FavoritesList({ favorites, token, onDelete, settings, setFavorites }) {
   const [optimisticMovies, optimisticDelete] = useOptimistic(
     favorites,
     (state, movieId) => {
@@ -22,7 +22,7 @@ function FavoritesList({ favorites, token, setFavorites }) {
       });
       await handleDeleteBookmark(movieId, token);
 
-      setFavorites(movieId);
+      onDelete(movieId);
     } catch (error) {
       console.error("Failed to delete bookmark:", error);
     }
@@ -43,11 +43,12 @@ function FavoritesList({ favorites, token, setFavorites }) {
         ))}
       </div>
       <Pagination
-        settings={optimisticMovies.paginationSettings}
+        settings={settings}
         link={"/favorites"}
         token={token}
         favoriti={optimisticMovies.bookmarks}
         className="mx-auto"
+        setFavorites={setFavorites}
       />
     </div>
   );

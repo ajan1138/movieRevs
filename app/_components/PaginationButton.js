@@ -1,8 +1,16 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { handleGetBookmarks } from "../services/bookmarksApi";
 
-function PaginationButton({ children, search, currentPage, link }) {
+function PaginationButton({
+  children,
+  search,
+  currentPage,
+  link,
+  token,
+  setFavorites,
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -15,7 +23,12 @@ function PaginationButton({ children, search, currentPage, link }) {
       newSearchParams.set("search", search);
     }
 
-    router.push(`${link}?${newSearchParams.toString()}`);
+    const url = `${link}?${newSearchParams.toString()}`;
+
+    router.push(url);
+
+    const movies = await handleGetBookmarks(token, children);
+    setFavorites(movies);
   }
 
   return (

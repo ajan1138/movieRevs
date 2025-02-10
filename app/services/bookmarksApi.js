@@ -3,7 +3,6 @@ import LoginRequired from "../_components/LoginRequired";
 import NoBookmarks from "../_components/NoBookmarks";
 
 export async function handleDeleteBookmark(bookmarkID, token) {
-  console.log(bookmarkID);
   try {
     const response = await fetch("http://localhost:8080/bookmark", {
       method: "DELETE",
