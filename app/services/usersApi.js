@@ -71,14 +71,17 @@ export async function handleUpdateUser(e, user, router, token) {
   e.preventDefault();
 
   try {
-    const response = await fetch(`http://localhost:8080/user/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token.value}`,
-      },
-      body: JSON.stringify(user),
-    });
+    const response = await fetch(
+      `http://localhost:8080/user-settings/${user.id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token.value}`,
+        },
+        body: JSON.stringify(user),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to update user");

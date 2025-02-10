@@ -18,8 +18,6 @@ async function Page({ params }) {
 
   let backdropURL = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
 
-  console.log(simMovies.results > 0);
-
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       <Header />

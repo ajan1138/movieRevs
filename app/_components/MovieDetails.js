@@ -21,8 +21,6 @@ async function MovieDetails({ movie, token }) {
   if (poster.includes("w500null") || poster.includes("originalnull"))
     poster = photo;
 
-  console.log(poster);
-
   const genreNames = genres.map((genre) => {
     return genre.name;
   });
@@ -36,7 +34,9 @@ async function MovieDetails({ movie, token }) {
         height={540}
         width={360}
         priority
+        style={{ width: "auto", height: "auto" }}
       />
+
       <div className="flex flex-col ml-20 space-y-5">
         <p className="logo body text-6xl">{title}</p>
         <div className="flex flex-row space-x-2">

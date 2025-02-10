@@ -25,6 +25,13 @@ function RegisterForm({ title, buttonText, user, token }) {
 
   let { name, surname, email, setName, setSurname, setEmail } = useCon();
 
+  let realUser = {
+    ...user,
+    name: user.name !== name ? name : user.name,
+    surname: user.surname !== surname ? surname : user.surname,
+    email: user.email !== email ? email : user.email,
+  };
+
   return (
     <form
       className="text-black flex flex-col w-[720px] bg-white rounded-3xl"
@@ -46,7 +53,7 @@ function RegisterForm({ title, buttonText, user, token }) {
                 setEmail,
                 router
               )
-          : (e) => handleUpdateUser(e, user, router, token)
+          : (e) => handleUpdateUser(e, realUser, router, token)
       }
     >
       <div className="flex items-center justify-center border-b border-gray-600 p-4 pb-6 ">
