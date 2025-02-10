@@ -27,9 +27,9 @@ function RegisterForm({ title, buttonText, user, token }) {
 
   let realUser = {
     ...user,
-    name: user.name !== name ? name : user.name,
-    surname: user.surname !== surname ? surname : user.surname,
-    email: user.email !== email ? email : user.email,
+    name: name === user.name ? user.name : name,
+    surname: surname === user.surname ? user.surname : surname,
+    email: email === user.email ? user.email : email,
   };
 
   return (
