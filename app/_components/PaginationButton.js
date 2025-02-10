@@ -27,8 +27,10 @@ function PaginationButton({
 
     router.push(url);
 
-    const movies = await handleGetBookmarks(token, children);
-    setFavorites(movies);
+    if (token) {
+      const movies = await handleGetBookmarks(token, children);
+      setFavorites(movies);
+    }
   }
 
   return (
